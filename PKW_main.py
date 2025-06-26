@@ -1037,14 +1037,14 @@ class main():
             self.diff_P_BZ = [0]
             self.P_BoP_pre_AVL = [0]
 
-    def __call__(self, SaveIt=False, savefolder='D:/Projekte/Mirai/' + str(datetime.now().date()), csv=False, Plots_vorg=False, Plot_indiv=False, Plot_Live=False, Plots_alt=False, x_indiv=0, y1_indiv=0, y2_indiv=0, y3_indiv=0, y1_live=0, y2_live=0, y3_live=0):
+    def __call__(self, SaveIt=False, savefolder='./Plots/' + str(datetime.now().date()), csv=False, Plots_vorg=False, Plot_indiv=False, Plot_Live=False, Plots_alt=False, x_indiv=0, y1_indiv=0, y2_indiv=0, y3_indiv=0, y1_live=0, y2_live=0, y3_live=0):
         if 'Initialisierungen':
             if Plot_Live == True:
                 import socket
                 TCP_IP = '127.0.0.1'
                 TCP_PORT = 7800
                 sender = []
-                os.startfile("Liveplot\\LiveMonitor.exe")
+                os.startfile("LiveMonitor.exe")
                 i=0
                 for y in [y1_live, y2_live, y3_live]:
                     if isinstance(y, str):

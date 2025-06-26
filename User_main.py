@@ -38,19 +38,18 @@ Ausgabeparameter = ['Zeit', 'Soll_Geschwindigkeit', 'Ist_Geschwindigkeit', 'Soll
 
 if __name__ == '__main__':
     SaveIt = True #Sollen die Plots gespeichert werden?
-    savefolder = 'D:/Projekte/Mirai/' + str(datetime.now().date()) #Legen Sie den Speicherort fest.
+    savefolder = './Plots/' + str(datetime.now().date()) #Legen Sie den Speicherort fest.
 
     csv = False #Das Erstellen einer CSV-Datei zur Datenverarbeitung kann hier ausgeschaltet werden.
 
     Plots_vorgefertigt = True #Das Anzeigen aller vorgefertigeten Plots kann hier ausgeschaltet werden.
 
-    LivePlot = False #Das Anzeigen des Live-Plots kann hier ausgeschaltet werden.
+    LivePlot = False #Das Anzeigen des Live-Plots kann hier ausgeschaltet werden. (benötigt https://github.com/RadioNCN/LiveMonitor/releases/tag/v0.4.0)
     y1_live = 'Ist_Geschwindigkeit' #Hier können bis zu 3 Größen, aus der Tabelle Ausgabeparameter, ausgewählt werden, die während der Simulation in einem Plot dargestellt werden sollen. Eine gültige Eingabe für y1 ist notwendig. Die Variablen werden auf einer Skala angezeigt
     y2_live = 'Batterie_Ladestand'
     y3_live = 'BZ_Stapel_Temperatur'
 
     Plot_individuell = True #Das Erstellen eines individuellen Plots kann hier ausgeschaltet werden
-    PlotStyle = 'LinePlot'
     x_indiv = 'Stapel_Strom' #Hier können Variablen, aus der Tabelle AUsgabeparameter, ausgewählt werden, die übereinander geplottet werden sollen. Gültige Eingaben für x_indiv und y1_indiv sind notwendig.
     y1_indiv = 'Stapel_Spannung'
     y2_indiv = 'Kompressor_Druckverhältnis'
