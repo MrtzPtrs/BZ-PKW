@@ -93,15 +93,15 @@ class main():
         if SaveIt == True:
             os.makedirs(savefolder, exist_ok=True)
             df.to_csv(os.path.join(savefolder, 'csv_' + Speichername + '.csv'), index=False)
-    def Plot_x_y(self, SaveIt, Speichername, x_indiv, y_indiv, y2_indiv, y3_indiv):
+    def Plot_x_y(self, savefolder, SaveIt, Speichername, x_indiv, y_indiv, y2_indiv, y3_indiv):
         axis = [x_indiv, y_indiv, y2_indiv, y3_indiv]
         for a in axis:
             if a in ['Zeit']:
-                a_Einheit = 'Zeit [s]'
+                a_Einheit = 'Zeit / s'
                 a_label = 'Zeit'
                 a_value = self.t
             elif a in ['Ist_Geschwindigkeit', 'Soll_Geschwindigkeit']:
-                a_Einheit = 'Geschwindigkeit ['r'$\frac{m}{s}$]'
+                a_Einheit = 'Geschwindigkeit / 'r'$\frac{m}{s}$'
                 if a == 'Ist_Geschwindigkeit':
                     a_label = 'Ist-Geschwindigkeit'
                     a_value = self.v_act
@@ -109,7 +109,7 @@ class main():
                     a_label = 'Soll-Geschwindigkeit'
                     a_value = list(self.parameter['FZ_geschw'])
             elif a in ['Ist_Beschleunigung', 'Soll_Beschleunigung']:
-                a_Einheit = 'Beschleunigung ['r'$\frac{m}{s^{2}}$]'
+                a_Einheit = 'Beschleunigung / 'r'$\frac{m}{s^{2}}$'
                 if a == 'Ist_Beschleunigung':
                     a_label = 'Ist-Beschleunigung'
                     a_value = self.a_act
@@ -117,7 +117,7 @@ class main():
                     a_label = 'Soll-Beschleunigung'
                     a_value = list(self.parameter['FZ_beschl'])
             elif a in ['BZ_Leistung', 'BoP_Leistungsaufnahme', 'Batterie_Leistung', 'mech._Bremsleistung', 'Rad_Leistung', 'E_Motor_Soll_Leistung', 'E_Motor_Ist_Leistung', 'HV_Bus_Soll_Leistung', 'HV_Bus_Ist_Leistung', 'BZ_Maximalleistung']:
-                a_Einheit = 'Leistung [W]'
+                a_Einheit = 'Leistung / W '
                 if a == 'Rad_Leistung':
                     a_label = 'Radleistung'
                     a_value = self.P_Rad
@@ -149,7 +149,7 @@ class main():
                     a_label = 'maximale BZ-Stapel-Leistung'
                     a_value = self.P_BZ_max
             elif a in ['Zustand_Hybridsystemregelung', 'Zustand_Temperaturregelung']:
-                a_Einheit = 'Case [-]'
+                a_Einheit = 'Case / - '
                 if a == 'Zustand_Hybridsystemregelung':
                     a_label = 'SoC-Case'
                     a_value = self.SoC_Case
@@ -157,11 +157,11 @@ class main():
                     a_label = 'HT-Case'
                     a_value = self.case_HT
             elif a in ['Batterie_Ladestand']:
-                a_Einheit = 'Ladestand [%]'
+                a_Einheit = 'Ladestand / -'
                 a_label = 'Ladestand'
                 a_value = self.SoC
             elif a in ['BZ_System_Effizienz', 'BZ_Stapel_Effizienz', 'Fahrzeug_Effizienz']:
-                a_Einheit = 'Effizienz [%]'
+                a_Einheit = 'Effizienz / -'
                 if a == 'BZ_Stapel_Effizienz':
                     a_label = 'Stapel-Effizienz'
                     a_value = self.Eff_BZ_Stack
@@ -172,7 +172,7 @@ class main():
                     a_label = 'Fahrzeug-Effizienz'
                     a_value = self.Eff_Vehicle
             elif a in ['Kathoden_Massenstrom', 'Kathoden_Stapel_Massenstrom', 'Anoden_Massenstrom', 'HT_Massenstrom', 'HT_Massenstrom_durch_den_Stapel', 'HT_Massenstrom_durch_den_Wärmetauscher', 'NT_Massenstrom', 'H2_Injektor_Massenstrom']:
-                a_Einheit = 'Massensstrom ['r'$\frac{g}{s}$]'
+                a_Einheit = 'Massensstrom / 'r'$\frac{g}{s}$'
                 if a == 'Kathoden_Massenstrom':
                     a_label = 'Kathoden-Massenstrom'
                     a_value = self.m_dot_C
@@ -198,11 +198,11 @@ class main():
                     a_label = 'Wasserstoff-Einlassmassenstrom'
                     a_value = self.m_dot_H2_current
             elif a in ['H2_Verbrauch']:
-                a_Einheit = 'Wasserstoffverbrauch [g]'
+                a_Einheit = 'Wasserstoffverbrauch / g'
                 a_label = 'Wasserstoffverbrauch'
                 a_value = self.m_H2_total
             elif a in ['Kompressor_Druckverhältnis', 'Rezirkulations_Druckverhältnis']:
-                a_Einheit = 'Druckverhältnis [-]'
+                a_Einheit = 'Druckverhältnis / 'r'$\frac{bara}{bara}$'
                 if a == 'Kompressor_Druckverhältnis':
                     a_label = 'Kompressordruckverhältnis'
                     a_value = self.p_rat_C_Comp
@@ -210,7 +210,7 @@ class main():
                     a_label = 'Rezirkulationsdruckverhältnis'
                     a_value = self.p_rat_A_Rezi
             elif a in ['Kathoden_Druck_am_BZ_Eintritt', 'Kathoden_Druck_am_BZ_Austritt', 'Anoden_Druck_am_BZ_Eintritt', 'Anoden_Druck_am_BZ_Austritt', 'HT_Druck', 'NT_Druck']:
-                a_Einheit = 'Druck [bara]'
+                a_Einheit = 'Druck / bara'
                 if a == 'Kathoden_Druck_am_BZ_Eintritt':
                     a_label = 'Kathodendruck am Stapeleintritt'
                     a_value = self.p_C_BZ_in
@@ -230,7 +230,7 @@ class main():
                     a_label = 'Druck des NT-Kühlmittels'
                     a_value = self.p_Pump_NT
             elif a in ['BZ_Stapel_Temperatur', 'BZ_Kathodenelektroden_Temperatur', 'BZ_Kathodenkanal_Temperatur', 'HT_Temperatur_hoch', 'HT_Temperatur_niedrig', 'BZ_Anodenkanal_Temperatur', 'NT_Temperatur_niedrig', 'NT_Temperatur_hoch']:
-                a_Einheit = 'Temperatur [K]'
+                a_Einheit = 'Temperatur / K'
                 if a == 'BZ_Stapel_Temperatur':
                     a_label = 'Stapel-Temperatur'
                     a_value = self.Temp_BZ
@@ -256,7 +256,7 @@ class main():
                     a_label = 'Temperatur nach dem NT-Wärmetauscher'
                     a_value = self.Temp_Co_NT_WTau_out
             elif a in ['Kathoden_Feuchte_am_BZ_Austritt', 'Kathoden_Feuchte_am_BZ_Eintritt', 'durchschn_BZ_Kathodenkanal_Feuchte', 'durchschn_BZ_Kathodenelektroden_Feuchte', 'durchschn_BZ_Anodenkanal_Feuchte', 'durchschn_BZ_Anodenelektroden_Feuchte']:
-                a_Einheit = 'relative Feuchte [-]'
+                a_Einheit = 'relative Feuchte / -'
                 if a == 'Kathoden_Feuchte_am_BZ_Eintritt':
                     a_label = 'Kathodenfeuchte am Stapeleintritt'
                     a_value = self.rH_C_BZ_in
@@ -276,11 +276,11 @@ class main():
                     a_label = 'durchschn. Feuchte im Andoenkanal'
                     a_value = self.rH_AK
             elif a in ['therm_BZ_Leistung']:
-                a_Einheit = 'thermische Leistung [W]'
+                a_Einheit = 'thermische Leistung / W'
                 a_label = 'thermische Stapel-Leistung'
                 a_value = self.P_BZ_Heat
             elif a in ['Wärmeübertrag_vom_Stapel_ins_Kühlmittel', 'Zwischenkühler_Wärmeübertrag', 'Kompressor_Motor_Wärmeübertrag', 'Wechselrichter_Wärmeübertrag']:
-                a_Einheit = 'Wärmestrom [W]'
+                a_Einheit = 'Wärmestrom / W'
                 if a == 'Wärmeübertrag_vom_Stapel_ins_Kühlmittel':
                     a_label = 'Wärmeübertrag ins Kühlmittel im Stapel'
                     a_value = self.P_BZ_Cool
@@ -294,7 +294,7 @@ class main():
                     a_label = 'Wärmestrom im Wechselrichter'
                     a_value = self.P_Inv_Heat
             elif a in ['H20_Stroffmengenstrom_durch_die_Membran', 'N2_Stroffmengenstrom_durch_die_Membran']:
-                a_Einheit = 'Stoffmengenstrom ['r'$\frac{mol}{s}$]'
+                a_Einheit = 'Stoffmengenstrom / 'r'$\frac{mol}{s}$'
                 if a == 'H20_Stroffmengenstrom_durch_die_Membran':
                     a_label = 'Wasserübertrag durch die Membran (Ka zu An)'
                     a_value = self.n_dot_H2O_cross
@@ -302,11 +302,11 @@ class main():
                     a_label = 'Stickstoffübertrag durch die Membran (Ka zu An)'
                     a_value = self.n_dot_N2_cross
             elif a in ['Stapel_Strom']:
-                a_Einheit = 'Strom [A]'
+                a_Einheit = 'Strom / A'
                 a_label = 'Stapelstrom'
                 a_value = self.I_BZ
             elif a in ['Stapel_Spannung', 'Zell_Spannung', 'ohmsche Verluste', 'Aktivierungsverluste', 'Konzentrationsverluste']:
-                a_Einheit = 'Spannung [V]'
+                a_Einheit = 'Spannung / V'
                 if a == 'Stapel_Spannung':
                     a_label = 'Stapelspannung'
                     a_value = self.U_BZ
@@ -344,12 +344,11 @@ class main():
                     y3_value = a_value
                 except:
                     None
-        savefolder = 'D:/Projekte/Mirai/' + str(datetime.now().date())
         fig_size_x, fig_size_y = 20, 8
         fs_Title = 20
         fs_Lable = 14
         fig, ax1 = plt.subplots(figsize=(fig_size_x, fig_size_y))
-        plt.title("variabler Plot während des " + Speichername + "-Lastprofils", fontsize=fs_Title)
+        plt.title("Variabler Plot während des " + Speichername + "-Lastprofils", fontsize=fs_Title)
         ax1.grid()
         ax1.set_xlabel(x_Einheit, fontsize=fs_Lable)
 
@@ -381,11 +380,11 @@ class main():
             lines += line3,
 
         labels = [line.get_label() for line in lines]
-        ax1.legend(lines, labels, loc=2)
+        ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, -0.075), ncol=3)
 
         if SaveIt == True:
             os.makedirs(savefolder, exist_ok=True)
-            plt.savefig(os.path.join(savefolder, 'variabler_Plot_' + Speichername + '_Lastprofil' + '.PNG'))
+            plt.savefig(os.path.join(savefolder, 'variabler_Plot_' + Speichername + '_Lastprofil' + '.PNG'), bbox_inches='tight')
     def Plot_Leistungsverteilung(self, savefolder, SaveIt, Speichername, t, P_Rad, P_E_M, P_E_M_Soll, P_mB, P_Bat, P_BZ, P_BoP_act):
         fig_size_x, fig_size_y = 20, 8
         fs_Lable = 14
@@ -393,7 +392,6 @@ class main():
         fig, ax1 = plt.subplots(figsize=(fig_size_x, fig_size_y))
         plt.title("Lastverteilung während des " + Speichername + "-Lastprofils", fontsize=fs_Title)
 
-        ax1.set_ylim(-300000, 300000)
         ax1.grid()
 
         ax1.set_xlabel('Zeit / s', fontsize=fs_Lable)
@@ -407,10 +405,10 @@ class main():
         ax1.plot(t, P_mB, color='darkgray', label='mechBremse-Leistung')
         ax1.plot(t, P_BoP_act, color='purple', label='tats. BoP-Leistung')
 
-        ax1.legend(loc=2)
+        ax1.legend(loc='upper center', bbox_to_anchor=(0.5, -0.075), ncol=4)
         if SaveIt == True:
             os.makedirs(savefolder, exist_ok=True)
-            plt.savefig(os.path.join(savefolder, 'Leistungsverteilung_' + Speichername + '_Lastprofil' + '.PNG'))
+            plt.savefig(os.path.join(savefolder, 'Leistungsverteilung_' + Speichername + '_Lastprofil' + '.PNG'), bbox_inches='tight')
             # Data = np.transpose(np.array([P_HV, P_HV_Soll, P_E_M, P_BZ, P_Bat, P_mB, P_BoP, SoC]))
             # dataF = pd.DataFrame(Data[0:], columns=["P_HV", "P_HV_soll", "P_E_M", "P_BZ", "P_Bat", "P_mB", "P_BoP", "SoC"])
             # dataF.to_csv(savefolder + '/Leistungsverteilung_' + Speichername + '_Lastprofil.csv')
@@ -431,27 +429,27 @@ class main():
         ax1.grid()
         plt.title("Geschwindigkeitsprofil während des " + Speichername + "-Lastprofils", fontsize=fs_Title)
 
-        ax1.set_xlabel('Zeit [s]', fontsize=fs_Lable)
+        ax1.set_xlabel('Zeit / s', fontsize=fs_Lable)
         ax1.set_ylabel('Geschwindigkeit / 'r'$\frac{m}{s}$', fontsize=fs_Lable)
         ax2.set_ylabel('Beschleunigung / 'r'$\frac{m}{s^{2}}$', fontsize=fs_Lable)
         ax2.spines['right'].set_position(('outward', -50))
         ax3.set_ylabel('Leistung / W', fontsize=fs_Lable)
 
-        line1,=ax1.plot(t, v_Soll, color='black', label='Soll-Geschwindigkeit')
-        line2,=ax1.plot(t, v, color='black', linestyle='--', label='Ist-Geschwindigkeit')
-        line3,=ax2.plot(t, a_Soll, color='red', label='Soll-Beschleunigung')
-        line4,=ax2.plot(t, a, color='red', linestyle='--', label='Ist-Beschleunigung')
-        line5,=ax3.plot(t, P_E_M, color='blue', label='Soll-Leistung')
-        line6,=ax3.plot(t, P_E_M_Soll, color='blue', linestyle='--', label='Ist-Leistung')
+        line1,=ax1.plot(t, v_Soll, color='black', linestyle='--', label='Soll-Geschwindigkeit')
+        line2,=ax1.plot(t, v, color='black', label='Ist-Geschwindigkeit')
+        line3,=ax2.plot(t, a_Soll, color='red', linestyle='--', label='Soll-Beschleunigung')
+        line4,=ax2.plot(t, a, color='red', label='Ist-Beschleunigung')
+        line5,=ax3.plot(t, P_E_M_Soll, color='blue', linestyle='--', label='Soll-Leistung')
+        line6,=ax3.plot(t, P_E_M, color='blue', label='Ist-Leistung')
 
         lines = [line1, line2, line3, line4, line5, line6]
         labels = [line.get_label() for line in lines]
 
-        ax1.legend(lines, labels, loc=2)
+        ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, -0.075), ncol=3)
 
         if SaveIt == True:
             os.makedirs(savefolder, exist_ok=True)
-            plt.savefig(os.path.join(savefolder, 'Fahrzeug_' + Speichername + '_Lastprofil' + '.PNG'))
+            plt.savefig(os.path.join(savefolder, 'Fahrzeug_' + Speichername + '_Lastprofil' + '.PNG'), bbox_inches='tight')
     def Plot_Batterie(self, savefolder, SaveIt, Speichername, t, SoC_Case, SoC, P_Bat):
         fig_size_x, fig_size_y = 20, 8
         fs_Lable = 14
@@ -482,10 +480,10 @@ class main():
         lines = [line1, line2, line3]
         labels = [line.get_label() for line in lines]
 
-        ax1.legend(lines, labels, loc=2)
+        ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, -0.075), ncol=3)
         if SaveIt == True:
             os.makedirs(savefolder, exist_ok=True)
-            plt.savefig(os.path.join(savefolder, 'Batterie_' + Speichername + '_Lastprofil' + '.PNG'))
+            plt.savefig(os.path.join(savefolder, 'Batterie_' + Speichername + '_Lastprofil' + '.PNG'), bbox_inches='tight')
     def Plot_BZ_Polk_t(self, savefolder, SaveIt, Speichername, t, I_St, U_Zelle, U_ohm, U_conc, U_act):
         fig_size_x, fig_size_y = 20, 8
         fs_Title = 20
@@ -504,20 +502,20 @@ class main():
         ax1.set_ylabel('Strom / A', fontsize=fs_Lable)
         ax2.set_ylabel('Spannung / V', fontsize=fs_Lable)
 
-        line1, = ax1.plot(t, I_St, color='green', label='Stack-Stromstärke')
-        line2, = ax2.plot(t, U_Zelle, color='black', label='Zell-Spannung')
-        line3, = ax2.plot(t, U_conc, color='blue', linestyle='--', label='Konzentrationsverluste')
-        line4, = ax2.plot(t, U_act, color='red', linestyle='--', label='Aktivierungsverluste')
-        line5, = ax2.plot(t, U_ohm, color='green', linestyle='--', label='ohmsche Verluste')
+        line4, = ax1.plot(t, I_St, color='green', label='Stack-Stromstärke')
+        line5, = ax2.plot(t, U_Zelle, color='black', label='Zell-Spannung')
+        line1, = ax2.plot(t, U_conc, color='blue', linestyle='--', label='Konzentrationsverluste')
+        line2, = ax2.plot(t, U_act, color='red', linestyle='--', label='Aktivierungsverluste')
+        line3, = ax2.plot(t, U_ohm, color='green', linestyle='--', label='ohmsche Verluste')
 
         lines = [line1, line2, line3, line4, line5]
         labels = [line.get_label() for line in lines]
 
-        ax1.legend(lines, labels, loc=2)
+        ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, -0.075), ncol=3)
 
         if SaveIt == True:
             os.makedirs(savefolder, exist_ok=True)
-            plt.savefig(os.path.join(savefolder, 'Stapel_über_t_' + Speichername + '_Lastprofil' + '.PNG'))
+            plt.savefig(os.path.join(savefolder, 'Stapel_über_t_' + Speichername + '_Lastprofil' + '.PNG'), bbox_inches='tight')
     def Plot_BZ_Polk_I_St(self, savefolder, SaveIt, Speichername, I_St, U_Zelle, U_ohm, U_conc, U_act):
         fig_size_x, fig_size_y = 20, 8
         fs_Title = 20
@@ -537,11 +535,11 @@ class main():
         ax1.scatter(I_St, U_act, color='red', label='Aktivierungsverluste')
         ax1.scatter(I_St, U_ohm, color='green', label='ohmsche Verluste')
 
-        ax1.legend(loc=2)
+        ax1.legend(loc='upper center', bbox_to_anchor=(0.5, -0.075), ncol=4)
 
         if SaveIt == True:
             os.makedirs(savefolder, exist_ok=True)
-            plt.savefig(os.path.join(savefolder, 'Stapel_Polkurve_' + Speichername + '_Lastprofil' + '.PNG'))
+            plt.savefig(os.path.join(savefolder, 'Stapel_Polkurve_' + Speichername + '_Lastprofil' + '.PNG'), bbox_inches='tight')
     def Plot_BZ_Bedingungen(self, savefolder, SaveIt, Speichername, t, Temp_BZ, rH_KE, rH_AE, p_KK, p_AK):
         fig_size_x, fig_size_y = 20, 8
         fs_Title = 20
@@ -551,11 +549,11 @@ class main():
         ax3 = ax1.twinx()
 
         ax1.set_ylim(285-8, 365)
-        ax2.set_ylim(0-0.16, 1.6)
+        ax2.set_ylim(0-0.2, 2.0)
         ax3.set_ylim(1-0.2, 3)
-        ax1.set_yticks([285,295,305,315,325,335,345,355])
-        ax2.set_yticks([0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6])
-        ax3.set_yticks([1.0, 1.25,1.5, 1.75, 2.0, 2.25, 2.5, 2.75,3.0])
+        ax1.set_yticks([285, 295, 305, 315, 325, 335, 345, 355])
+        ax2.set_yticks([0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0])
+        ax3.set_yticks([1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75,3.0])
         ax1.grid()
         plt.title("Stapelbedingungen während des " + Speichername + "-Lastprofils", fontsize=fs_Title)
 
@@ -574,10 +572,10 @@ class main():
         lines = [line1, line2, line3, line4, line5]
         labels = [line.get_label() for line in lines]
 
-        ax1.legend(lines, labels, loc=2)
+        ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, -0.075), ncol=3)
         if SaveIt == True:
             os.makedirs(savefolder, exist_ok=True)
-            plt.savefig(os.path.join(savefolder, 'Stapel_Bedingungen_' + Speichername + '_Lastprofil' + '.PNG'))
+            plt.savefig(os.path.join(savefolder, 'Stapel_Bedingungen_' + Speichername + '_Lastprofil' + '.PNG'), bbox_inches='tight')
     def Plot_Kathode(self, savefolder, SaveIt, Speichername, t, m_dot_C, m_dot_C_BZ, p_rat_C_Comp, rH_KE, rH_KK, Temp_KK, Temp_KE):
         fig_size_x, fig_size_y = 20, 8
         fs_Title = 20
@@ -617,11 +615,11 @@ class main():
         lines = [line1, line2, line3, line4, line5, line6, line7]
         labels = [line.get_label() for line in lines]
 
-        ax1.legend(lines, labels, loc=2)
+        ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, -0.075), ncol=4)
 
         if SaveIt == True:
             os.makedirs(savefolder, exist_ok=True)
-            plt.savefig(os.path.join(savefolder, 'Gaseigenschaften_Kathode_' + Speichername + '_Lastprofil' + '.PNG'))
+            plt.savefig(os.path.join(savefolder, 'Gaseigenschaften_Kathode_' + Speichername + '_Lastprofil' + '.PNG'), bbox_inches='tight')
     def Plot_Anode(self, savefolder, SaveIt, Speichername, t, m_dot_A_BZ_in, p_rat_A_Rezi, rH_AE, rH_AK, m_dot_H2_current, m_dot_H2_Purge):
         fig_size_x, fig_size_y = 20, 8
         fs_Title = 20
@@ -642,7 +640,7 @@ class main():
         ax1.set_xlabel('Zeit / s', fontsize=fs_Lable)
         ax1.set_ylabel('Massenstrom / 'r'$\frac{g}{s}$', fontsize=fs_Lable)
         ax2.set_ylabel('Druckverhältnis / 'r'$\frac{bara}{bara}$', fontsize=fs_Lable)
-        ax3.set_ylabel('relative Feuchte -', fontsize=fs_Lable)
+        ax3.set_ylabel('relative Feuchte / -', fontsize=fs_Lable)
         ax3.spines['right'].set_position(('outward', -50))
 
         line1, = ax1.plot(t, m_dot_A_BZ_in, color='black', label='Massenstrom am Stapeleintritt')
@@ -655,11 +653,11 @@ class main():
         lines = [line1, line2, line3, line4, line5, line6]
         labels = [line.get_label() for line in lines]
 
-        ax1.legend(lines, labels, loc=2)
+        ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, -0.075), ncol=3)
 
         if SaveIt == True:
             os.makedirs(savefolder, exist_ok=True)
-            plt.savefig(os.path.join(savefolder, 'Gaseigenschaften_Anode_' + Speichername + '_Lastprofil' + '.PNG'))
+            plt.savefig(os.path.join(savefolder, 'Gaseigenschaften_Anode_' + Speichername + '_Lastprofil' + '.PNG'), bbox_inches='tight')
     def Plot_HT_Kreisl(self, savefolder, SaveIt, Speichername, t, Case_HT, Temp_BZ, P_ZwK_Heat, P_BZ_Heat, P_BZ_Cool, m_dot_HT, m_dot_HT_WTau, m_dot_HT_BZ):
         fig_size_x, fig_size_y = 20, 8
         fs_Title = 20
@@ -671,11 +669,11 @@ class main():
 
         ax1.set_ylim(0-150,1500)
         ax2.set_ylim(0-15000,150000)
-        ax3.set_ylim(285-8, 365)
+        ax3.set_ylim(275-10, 375)
         ax4.set_ylim(0-0.3,3)
         ax1.set_yticks([0,150,300,450,600,750,900,1050,1200,1350,1500])
         ax2.set_yticks([0,15000,30000,45000,60000,75000,90000,105000,120000,135000,150000])
-        ax3.set_yticks([265,275,285,295,305,315,325,335,345,355,365])
+        ax3.set_yticks([275,285,295,305,315,325,335,345,355,365,375])
         ax4.set_yticks([1,2])
         ax1.grid()
         plt.title("Kühlmitteleigenschaften im HT-Kreislauf während des " + Speichername + "-Lastprofils", fontsize=fs_Title)
@@ -685,8 +683,8 @@ class main():
         ax2.set_ylabel('Wärmeleistung / P', fontsize=fs_Lable)
         ax2.spines['right'].set_position(('outward', 50))
         ax3.set_ylabel('Temperatur / K', fontsize=fs_Lable)
-        ax3.spines['right'].set_position(('outward', -50))
-        ax4.set_ylabel('Case', fontsize=fs_Lable)
+        ax4.set_ylabel('Case / -', fontsize=fs_Lable)
+        ax4.spines['right'].set_position(('outward', -50))
 
         line1, = ax1.plot(t, m_dot_HT_WTau, color='lightgray', label='Massenstrom durch den WTau')
         line2, = ax1.plot(t, m_dot_HT, color='black', label='Massenstrom')
@@ -700,11 +698,11 @@ class main():
         lines = [line1, line2, line3, line4, line5, line6, line7, line8]
         labels = [line.get_label() for line in lines]
 
-        ax1.legend(lines, labels, loc=2)
+        ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, -0.075), ncol=4)
 
         if SaveIt == True:
             os.makedirs(savefolder, exist_ok=True)
-            plt.savefig(os.path.join(savefolder, 'Eigenschaften_HT_Kreislauf_' + Speichername + '_Lastprofil' + '.PNG'))
+            plt.savefig(os.path.join(savefolder, 'Eigenschaften_HT_Kreislauf_' + Speichername + '_Lastprofil' + '.PNG'), bbox_inches='tight')
     def Plot_NT_Kreisl(self, savefolder, SaveIt, Speichername, t, P_Inv_Heat, P_Comp_Heat, p_NT, m_dot_NT):
         fig_size_x, fig_size_y = 20, 8
         fs_Title = 20
@@ -736,12 +734,20 @@ class main():
         lines = [line1, line2, line3, line4]
         labels = [line.get_label() for line in lines]
 
-        ax1.legend(lines, labels, loc=2)
+        ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, -0.075), ncol=2)
 
         if SaveIt == True:
             os.makedirs(savefolder, exist_ok=True)
-            plt.savefig(os.path.join(savefolder, 'Eigenschaften_NT-Kreislauf_' + Speichername + '_Lastprofil' + '.PNG'))
+            plt.savefig(os.path.join(savefolder, 'Eigenschaften_NT-Kreislauf_' + Speichername + '_Lastprofil' + '.PNG'), bbox_inches='tight')
     def Plot_Effizienzen(self, savefolder, SaveIt, Speichername, t, Eff_BZ_Sys, Eff_BZ, Eff_Veh, SoC, m_H2):
+        for i in range (len(t)):
+            if Eff_BZ_Sys[i] >= 0.99999 or Eff_BZ_Sys[i] <= 0.0001:
+                Eff_BZ_Sys[i] = np.nan
+            if Eff_BZ[i] >= 0.99999 or Eff_BZ[i] <= 0.0001:
+                Eff_BZ[i] = np.nan
+            if Eff_Veh[i] >= 0.99999 or Eff_Veh[i] <= 0.0001:
+                Eff_Veh[i] = np.nan
+
         fig_size_x, fig_size_y = 20, 8
         fs_Lable = 14
         fs_Title = 20
@@ -773,10 +779,10 @@ class main():
         lines = [line1, line2, line3, line4, line5]
         labels = [line.get_label() for line in lines]
 
-        ax1.legend(lines, labels, loc=2)
+        ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, -0.075), ncol=3)
         if SaveIt == True:
             os.makedirs(savefolder, exist_ok=True)
-            plt.savefig(os.path.join(savefolder, 'Effizenzen_' + Speichername + '_Lastprofil' + '.PNG'))
+            plt.savefig(os.path.join(savefolder, 'Effizenzen_' + Speichername + '_Lastprofil' + '.PNG'), bbox_inches='tight')
     def Plot_BoP(self, savefolder, SaveIt, Speichername, t, P_BoP, P_Comp, P_Rezi, P_Pump_NT, P_Pump_HT):
         fig_size_x, fig_size_y = 20, 8
         fs_Lable = 14
@@ -799,10 +805,10 @@ class main():
         lines = [line1, line2, line3, line4, line5]
         labels = [line.get_label() for line in lines]
 
-        ax1.legend(lines, labels, loc=2)
+        ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, -0.075), ncol=3)
         if SaveIt == True:
             os.makedirs(savefolder, exist_ok=True)
-            plt.savefig(os.path.join(savefolder, 'BoP_Leistungsverteilung_' + Speichername + '_Lastprofil' + '.PNG'))
+            plt.savefig(os.path.join(savefolder, 'BoP_Leistungsverteilung_' + Speichername + '_Lastprofil' + '.PNG'), bbox_inches='tight')
 
     def __init__(self, Lastprofil = 'WLTC', Umgebung = 'standard', Steigung = '0%', Zuladung= '100kg', SoC = '55%', st_C='1.5', presrat_Komp='2.0', Temp_ZwK='60°C', t_Komp_Dynamik= "1.5s", opres_A='0.4bar', st_A='2.0', mean_H2='85% vol', dtemp_C_Co="15K", dtemp_FC='15K', x_glyk='30% vol', Temp_BZ_Init='kalt'):
         self.Naturkonstanten = {
@@ -1526,7 +1532,7 @@ class main():
                 self.Plot_Effizienzen(savefolder=savefolder, SaveIt=SaveIt, Speichername=self.Lastprofil, t=self.t, Eff_BZ_Sys=self.Eff_BZ_System, Eff_BZ=self.Eff_BZ_Stack, Eff_Veh=self.Eff_Vehicle, SoC=self.SoC, m_H2=self.m_H2_total)
                 self.Plot_BoP(savefolder=savefolder, SaveIt=SaveIt, Speichername=self.Lastprofil, t=self.t, P_BoP=self.P_BoP_act, P_Comp=self.P_Comp, P_Rezi=self.P_Rezi, P_Pump_NT=self.P_Pump_NT, P_Pump_HT=self.P_Pump_HT)
             if Plot_indiv == True:
-                self.Plot_x_y(Speichername=self.Lastprofil, SaveIt=SaveIt, x_indiv=x_indiv, y_indiv=y1_indiv, y2_indiv=y2_indiv, y3_indiv=y3_indiv)
+                self.Plot_x_y(savefolder=savefolder, Speichername=self.Lastprofil, SaveIt=SaveIt, x_indiv=x_indiv, y_indiv=y1_indiv, y2_indiv=y2_indiv, y3_indiv=y3_indiv)
             if csv == True:
                 self.csv(SaveIt=SaveIt, savefolder=savefolder, Speichername='WLTC', Zeit=self.t, Soll_Geschwindigkeit=self.v_Soll, Ist_Geschwindigkeit=self.v_act, Soll_Beschleunigung=self.a_Soll,
                         Ist_Beschleunigung=self.a_act,
