@@ -3,8 +3,12 @@ Dies ist ein dynamisches PEM-Brennstoffzellen-Hybridfahrzeug-Modell.
 ## Anforderungen um das Modell zu starten:
 ```
 Python-Version: 3.10 (getestet) 
-installierte Pakete: datetime v5.5, matplotlib.pyplot v3.10.3, pandas v1.5.3, numpy v1.23.5
+installierte Pakete: datetime v5.5, matplotlib.pyplot v3.10.3, pandas v1.5.3, numpy v1.23.5, openpyxl v3.0.10
 ```
+
+### Zusätzliche Anforderungen für Echtzeit-Graphen
+
+Um die Ausgaben per Echtzeit-Graphen darstellen zu können muss die Datei aus https://github.com/RadioNCN/LiveMonitor/releases/tag/v0.4.0 heruntergeladen, kompiliert und in den Programmordner gespeichert werden.
 
 ## Struktur
 
@@ -40,7 +44,7 @@ Sollen die Auswertungen gespeichert werden muss die Variable SaveIt den Inhalt T
 
 ### Variation der Betriebsbedingungen
 
-Im Modell können Betriebsbedingungen des Fahrzeugs und der Brennstoffzelle variiert werden. Die Eingabe erfolgt in der Initialisierung der Klasse main (Zeile 59) per Keyword Argument. Die Keyword Arguments entsprechen den Listennamen der Eingabeparameter (Zeile 5-24) und die zuzuweisende Variable muss ein Element aus der jeweiligen Liste sein. Diese müssen als String eingegeben werden.
+Im Modell können Betriebsbedingungen des Fahrzeugs und der Brennstoffzelle variiert werden. Die Eingabe erfolgt in der Initialisierung der Klasse main (Zeile 58) per Keyword Argument. Die Keyword Arguments entsprechen den Listennamen der Eingabeparameter (Zeile 5-24) und die zuzuweisende Variable muss ein Element aus der jeweiligen Liste sein. Diese müssen als String eingegeben werden.
 
 ### Autor
 
