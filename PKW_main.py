@@ -1516,6 +1516,8 @@ class main():
                         MESSAGE = '{x}\n{y}\n'.format(x=t_1, y=y)
                         sender[i].send(bytes(MESSAGE, encoding='utf8'))
                         i+=1
+            progress = round(t / len(self.parameter['Time']) * 100,1)
+            print(f"\r Fortschritt: {progress}%", end="", flush=True)
 
         if 'Plotbefehle':
             if Plots_vorg == True:
